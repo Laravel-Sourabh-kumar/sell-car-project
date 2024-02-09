@@ -1,0 +1,57 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="card">
+    <div class="card-header">Manage Kms Driven</div>
+    <div class="card-body">
+        @can('create-user')
+         
+            <a href="{{route('kms-driven.create')}}" class="btn  btn-success btn-sm my-2"><i class="fa fa-plus"></i></a>
+        
+        @endcan
+         <table class="table table-striped table-bordered user_datatable w-100">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Kms Driven</th>
+                <th>Detail</th>
+                   
+                <th width="100px">Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+        </table>
+
+    </div>
+</div>
+    
+@endsection
+
+ 
+
+@section('script')
+
+
+<script type="text/javascript">
+  $(function () {
+    var table = $('.user_datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('kms-driven.index') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            
+            {data: 'kms', name: 'kms'},
+            {data: 'detail', name: 'detail'},
+           
+            
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+  });
+</script>
+
+
+@endsection
